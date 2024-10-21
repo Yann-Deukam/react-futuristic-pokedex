@@ -11,7 +11,102 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@layer components {
+  .main {
+    background-image: url("../assets/background1.jpeg");
+    width: 100%;
+    height: 90vh;
+  }
+
+  .main-container {
+    @apply backdrop-blur-lg bg-slate-800/50 z-10 h-[100vh] w-[100vw] overflow-hidden;
+  }
+  .app {
+    @apply grid grid-rows-[10vh_auto_10vh] grid-cols-1 h-[100vh] w-[100vw];
+  }
+
+  .app .content {
+    @apply mx-20 border border-white/50 h-[80vh] border-t-0 border-b-0;
+  }
+
+  nav {
+    @apply grid grid-cols-[5rem_auto_5rem] border-b border-white/50;
+  }
+
+  nav .block {
+    @apply flex justify-center items-center text-white cursor-pointer text-2xl hover:bg-slate-400/30 transition-all ease-in-out duration-200;
+  }
+
+  nav .block img {
+    @apply cursor-pointer h-[3rem];
+  }
+
+  nav .data {
+    @apply border border-white/50 border-t-0 border-b-0 px-[10rem];
+  }
+
+  nav .data ul {
+    @apply grid h-full list-none z-10 relative;
+  }
+
+  nav .data ul a {
+    @apply relative text-white flex justify-center items-center border-transparent transition-all ease-in-out duration-300;
+    position: relative;
+  }
+
+  /* Background and underline transition */
+  nav .data ul a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  nav .data ul a.active {
+    @apply bg-black;
+    position: relative;
+  }
+
+  nav .data ul a.active::before {
+    transform: scaleX(1);
+  }
+
+  /* Smooth movement for black background and underline on hover */
+  nav .data ul a:hover {
+    background-color: black;
+  }
+
+  nav .data ul a:hover::before {
+    transform: scaleX(1);
+  }
+
+  nav .data ul a li {
+    @apply uppercase cursor-pointer font-semibold tracking-widest;
+  }
+
+  footer {
+    @apply grid grid-cols-[5rem_auto_5rem] border-t border-white/50;
+  }
+
+  footer .block {
+    @apply flex justify-center items-center text-red-400 hover:text-red-600 cursor-pointer hover:bg-slate-400/30 transition-all ease-in-out duration-200;
+  }
+  footer .block img {
+    @apply cursor-pointer h-[3rem];
+  }
+
+  footer .data {
+    @apply border border-white/50 border-b-0 border-t-0;
+  }
+}
+
+@layer utilities {
+  nav .data ul {
+    grid-template-columns: repeat(5, 20%);
+  }
 }

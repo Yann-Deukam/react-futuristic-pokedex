@@ -1,7 +1,13 @@
-import React from "react"
+import React, { ComponentType } from "react"
 
-function Wrapper() {
-  return <div>Wrapper</div>
+const Wrapper = (Component: ComponentType) => {
+  return function WrappedComponent() {
+    return (
+      <div className="content">
+        <Component />
+      </div>
+    )
+  }
 }
 
 export default Wrapper
